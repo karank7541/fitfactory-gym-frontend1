@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 
 const VerifyOtp = () => {
   const navigate = useNavigate();
@@ -12,11 +12,14 @@ const VerifyOtp = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://fitfactory-backend1.onrender.com/api/auth/verify-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, otp }),
-      });
+      const res = await fetch(
+        "https://fitfactory-backend1.onrender.com/api/auth/verify-otp",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, otp }),
+        }
+      );
 
       const data = await res.json();
 
@@ -40,7 +43,6 @@ const VerifyOtp = () => {
 
   return (
     <div className="pt-28 min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-700 px-4">
-
       <div className="w-full max-w-md backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-8 animate-fadeIn">
 
         <h2 className="text-3xl font-bold text-center mb-4 text-white">
@@ -52,7 +54,6 @@ const VerifyOtp = () => {
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-
           <div>
             <label className="font-medium text-gray-200">Enter OTP</label>
             <div className="mt-2 flex items-center bg-white/20 border border-white/30 rounded-lg px-3">
@@ -77,14 +78,15 @@ const VerifyOtp = () => {
           </button>
         </form>
 
+        {/* FIXED: No more refresh issue */}
         <p className="mt-4 text-center text-gray-300">
           Wrong email?
-          <a
-            href="/register"
+          <Link
+            to="/register"
             className="text-blue-400 ml-1 font-semibold hover:underline"
           >
             Register again
-          </a>
+          </Link>
         </p>
 
       </div>

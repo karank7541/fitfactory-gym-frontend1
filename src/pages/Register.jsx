@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";   // ✅ Added Link
+import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const Register = () => {
 
     try {
       const res = await fetch(
-        "https://fitfactory-backend1.onrender.com/api/auth/send-otp",
+        "https://fitfactory-backend1.onrender.com/api/auth/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -176,7 +176,7 @@ const Register = () => {
           </button>
         </form>
 
-        {/* Login Link — FIXED */}
+        {/* Login Link */}
         <p className="mt-4 text-center text-gray-200">
           Already have an account?
           <Link
