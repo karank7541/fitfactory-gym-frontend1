@@ -28,7 +28,7 @@ const Register = () => {
 
     try {
       const res = await fetch(
-        "https://fitfactory-backend1.onrender.com/api/auth/register",
+        "https://fitfactory-backend1.onrender.com/api/otp/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
