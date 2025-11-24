@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";   // ✅ Added Link
 
 const Register = () => {
   const navigate = useNavigate();
@@ -28,16 +28,19 @@ const Register = () => {
       return alert("Passwords do not match!");
 
     try {
-      const res = await fetch("https://fitfactory-backend1.onrender.com/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
+      const res = await fetch(
+        "https://fitfactory-backend1.onrender.com/api/auth/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.name,
+            phone: formData.phone,
+            email: formData.email,
+            password: formData.password,
+          }),
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) return alert(data.message);
@@ -47,7 +50,6 @@ const Register = () => {
       navigate("/verify-otp", {
         state: { email: formData.email },
       });
-
     } catch (err) {
       alert("Network error!");
       console.log(err);
@@ -56,8 +58,6 @@ const Register = () => {
 
   return (
     <div className="pt-28 min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-700 px-4">
-
-      {/* Card */}
       <div className="w-full max-w-md backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-8 animate-fadeIn">
 
         <h2 className="text-4xl font-bold text-center text-white mb-6">
@@ -174,18 +174,17 @@ const Register = () => {
           >
             Register
           </button>
-
         </form>
 
-        {/* Login Link */}
+        {/* Login Link — FIXED */}
         <p className="mt-4 text-center text-gray-200">
           Already have an account?
-          <a
-            href="/login"
+          <Link
+            to="/login"
             className="text-blue-400 ml-1 font-semibold hover:underline"
           >
             Login
-          </a>
+          </Link>
         </p>
 
       </div>
