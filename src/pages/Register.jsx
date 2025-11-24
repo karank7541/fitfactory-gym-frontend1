@@ -15,17 +15,16 @@ const Register = () => {
     confirmPassword: "",
   });
 
-  // Handle Input
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword)
+    if (formData.password !== formData.confirmPassword) {
       return alert("Passwords do not match!");
+    }
 
     try {
       const res = await fetch(
@@ -43,16 +42,17 @@ const Register = () => {
       );
 
       const data = await res.json();
-      if (!res.ok) return alert(data.message);
 
-      alert("OTP sent to your email! Please verify.");
+      if (!res.ok) {
+        return alert(data.message);
+      }
 
-      navigate("/verify-otp", {
-        state: { email: formData.email },
-      });
-    } catch (err) {
+      alert("OTP sent to your email.");
+
+      navigate("/verify-otp", { state: { email: formData.email } });
+    } catch (error) {
+      console.log(error);
       alert("Network error!");
-      console.log(err);
     }
   };
 
@@ -69,75 +69,65 @@ const Register = () => {
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-
-          {/* Full Name */}
+          
+          {/* Name */}
           <div>
             <label className="font-medium text-gray-200">Full Name</label>
-            <div className="mt-1 flex items-center bg-white/20 border border-white/30 rounded-lg px-3">
-              <span className="text-white text-xl">👤</span>
-              <input
-                type="text"
-                name="name"
-                required
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Enter your full name"
-                className="w-full bg-transparent p-3 text-white placeholder-gray-300 outline-none"
-              />
-            </div>
+            <input
+              type="text"
+              name="name"
+              required
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full mt-1 bg-white/20 p-3 text-white rounded-lg border border-white/30 outline-none"
+              placeholder="Enter your full name"
+            />
           </div>
 
           {/* Phone */}
           <div>
             <label className="font-medium text-gray-200">Phone Number</label>
-            <div className="mt-1 flex items-center bg-white/20 border border-white/30 rounded-lg px-3">
-              <span className="text-white text-xl">📞</span>
-              <input
-                type="text"
-                name="phone"
-                required
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="Enter mobile number"
-                className="w-full bg-transparent p-3 text-white placeholder-gray-300 outline-none"
-              />
-            </div>
+            <input
+              type="text"
+              name="phone"
+              required
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full mt-1 bg-white/20 p-3 text-white rounded-lg border border-white/30 outline-none"
+              placeholder="Enter your mobile number"
+            />
           </div>
 
           {/* Email */}
           <div>
             <label className="font-medium text-gray-200">Email</label>
-            <div className="mt-1 flex items-center bg-white/20 border border-white/30 rounded-lg px-3">
-              <span className="text-white text-xl">📧</span>
-              <input
-                type="email"
-                name="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Enter your email"
-                className="w-full bg-transparent p-3 text-white placeholder-gray-300 outline-none"
-              />
-            </div>
+            <input
+              type="email"
+              name="email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full mt-1 bg-white/20 p-3 text-white rounded-lg border border-white/30 outline-none"
+              placeholder="Enter your email"
+            />
           </div>
 
           {/* Password */}
           <div>
             <label className="font-medium text-gray-200">Password</label>
-            <div className="relative flex items-center bg-white/20 border border-white/30 rounded-lg px-3">
-              <span className="text-white text-xl">🔒</span>
+            <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
                 required
                 value={formData.password}
                 onChange={handleChange}
+                className="w-full mt-1 bg-white/20 p-3 text-white rounded-lg border border-white/30 outline-none"
                 placeholder="Create a password"
-                className="w-full bg-transparent p-3 text-white placeholder-gray-300 outline-none"
               />
               <span
-                className="absolute right-3 top-3 cursor-pointer text-gray-300"
                 onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-4 cursor-pointer text-gray-300"
               >
                 {showPassword ? "🙈" : "👁️"}
               </span>
@@ -147,42 +137,37 @@ const Register = () => {
           {/* Confirm Password */}
           <div>
             <label className="font-medium text-gray-200">Confirm Password</label>
-            <div className="relative flex items-center bg-white/20 border border-white/30 rounded-lg px-3">
-              <span className="text-white text-xl">✔️</span>
+            <div className="relative">
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
                 required
                 value={formData.confirmPassword}
                 onChange={handleChange}
+                className="w-full mt-1 bg-white/20 p-3 text-white rounded-lg border border-white/30 outline-none"
                 placeholder="Re-enter password"
-                className="w-full bg-transparent p-3 text-white placeholder-gray-300 outline-none"
               />
               <span
-                className="absolute right-3 top-3 cursor-pointer text-gray-300"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-4 top-4 cursor-pointer text-gray-300"
               >
                 {showConfirmPassword ? "🙈" : "👁️"}
               </span>
             </div>
           </div>
 
-          {/* Submit */}
+          {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold shadow-lg transition transform hover:scale-[1.02]"
+            className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-lg transition"
           >
             Register
           </button>
         </form>
 
-        {/* Login Link */}
         <p className="mt-4 text-center text-gray-200">
           Already have an account?
-          <Link
-            to="/login"
-            className="text-blue-400 ml-1 font-semibold hover:underline"
-          >
+          <Link to="/login" className="text-blue-400 ml-1 font-semibold hover:underline">
             Login
           </Link>
         </p>
