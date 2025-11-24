@@ -10,7 +10,7 @@ const AdminFeedback = () => {
   // Fetch feedback from backend
   const fetchFeedback = async () => {
     try {
-      const res = await fetch("http://localhost:5001/api/admin/feedback", {
+      const res = await fetch("https://fitfactory-backend1.onrender.com/api/admin/feedback", {
         headers: { Authorization: adminToken },
       });
 
@@ -40,7 +40,7 @@ const AdminFeedback = () => {
     if (!confirm) return;
 
     try {
-      const res = await fetch(`http://localhost:5001/api/admin/feedback/${id}`, {
+      const res = await fetch(`https://fitfactory-backend1.onrender.com/api/admin/feedback/${id}`, {
         method: "DELETE",
         headers: { Authorization: adminToken },
       });

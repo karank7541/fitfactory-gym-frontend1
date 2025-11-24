@@ -10,14 +10,14 @@ const Dashboard = () => {
 
   const [showScanner, setShowScanner] = useState(false);
   const [scanResult, setScanResult] = useState("");
-  const [scanLocked, setScanLocked] = useState(false); // prevent multiple scans
+  const [scanLocked, setScanLocked] = useState(false);
 
   // ----------------------------
   // Fetch LIVE USER DATA
   // ----------------------------
   const fetchUserData = async () => {
     try {
-      const res = await fetch("http://localhost:5001/api/auth/dashboard", {
+      const res = await fetch("https://fitfactory-backend1.onrender.com/api/auth/dashboard", {
         method: "GET",
         headers: {
           Authorization: token,
@@ -93,16 +93,14 @@ const Dashboard = () => {
   // QR SCAN HANDLER
   // ---------------------------
   const handleQR = async (qrText) => {
-    if (scanLocked) return; // Stop duplicate scans
+    if (scanLocked) return;
 
     setScanLocked(true);
     setScanResult(qrText);
-
-    // Close scanner popup
     setShowScanner(false);
 
     try {
-      const res = await fetch("http://localhost:5001/api/auth/scan-access", {
+      const res = await fetch("https://fitfactory-backend1.onrender.com/api/auth/scan-access", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -114,13 +112,11 @@ const Dashboard = () => {
       const data = await res.json();
       alert(data.message);
 
-      fetchUserData(); // refresh UI
-
+      fetchUserData();
     } catch (error) {
       alert("Scan error! Backend not responding.");
     }
 
-    // Unlock after 2 seconds
     setTimeout(() => setScanLocked(false), 2000);
   };
 
@@ -142,8 +138,6 @@ const Dashboard = () => {
   return (
     <div className="pt-28 min-h-screen bg-gray-100 px-4 flex justify-center">
       <div className="bg-white p-8 shadow-xl rounded-2xl w-full max-w-xl">
-
-        {/* Welcome */}
         <h2 className="text-3xl font-bold text-center text-gray-800">
           Welcome, {user.name || "User"} 👋
         </h2>
@@ -153,7 +147,6 @@ const Dashboard = () => {
           <StatusBadge />
         </div>
 
-        {/* User Info */}
         <div className="bg-gray-50 p-5 mt-6 rounded-xl shadow space-y-2">
           <p><strong>Phone:</strong> {user.phone || "Not Added"}</p>
           <p><strong>Plan:</strong> {user.plan || "None"}</p>
@@ -162,7 +155,6 @@ const Dashboard = () => {
           <p><strong>End Date:</strong> {subscriptionEnd || "-"}</p>
         </div>
 
-        {/* Countdown */}
         <div className="bg-gray-100 p-5 mt-6 rounded-xl text-center shadow-inner">
           {!timeLeft.expired ? (
             <>
@@ -179,7 +171,6 @@ const Dashboard = () => {
           )}
         </div>
 
-        {/* Scan Button */}
         {!timeLeft.expired && (
           <div className="text-center mt-8">
             <button
@@ -197,7 +188,6 @@ const Dashboard = () => {
           </p>
         )}
 
-        {/* Scanner Popup */}
         {showScanner && (
           <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
             <div className="bg-white p-5 rounded-xl shadow-xl w-[90%] max-w-md relative">
@@ -218,7 +208,6 @@ const Dashboard = () => {
           </div>
         )}
 
-        {/* Logout */}
         <button
           onClick={handleLogout}
           className="w-full bg-red-600 text-white mt-8 py-3 rounded-lg hover:bg-red-700 transition"

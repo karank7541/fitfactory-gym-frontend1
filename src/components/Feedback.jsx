@@ -14,7 +14,7 @@ const Feedback = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5001/api/feedback/create", {
+      const res = await fetch("https://fitfactory-backend1.onrender.com/api/feedback/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

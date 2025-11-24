@@ -12,7 +12,7 @@ const VerifyOtp = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5001/api/auth/verify-otp", {
+      const res = await fetch("https://fitfactory-backend1.onrender.com/api/auth/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),
@@ -53,7 +53,6 @@ const VerifyOtp = () => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
 
-          {/* OTP Input Field */}
           <div>
             <label className="font-medium text-gray-200">Enter OTP</label>
             <div className="mt-2 flex items-center bg-white/20 border border-white/30 rounded-lg px-3">
@@ -70,7 +69,6 @@ const VerifyOtp = () => {
             </div>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold shadow-lg transition transform hover:scale-[1.02]"
@@ -79,7 +77,6 @@ const VerifyOtp = () => {
           </button>
         </form>
 
-        {/* Back to Register */}
         <p className="mt-4 text-center text-gray-300">
           Wrong email?
           <a
