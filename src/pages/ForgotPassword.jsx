@@ -11,7 +11,7 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://fitfactory-backend1.onrender.com/api/auth/send-otp", {
+      const res = await fetch("https://fitfactory-backend1-production.up.railway.app/api/auth/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

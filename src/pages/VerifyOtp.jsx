@@ -13,7 +13,7 @@ const VerifyOtp = () => {
 
     try {
       const res = await fetch(
-        "https://fitfactory-backend1.onrender.com/api/auth/verify-otp",
+        "https://fitfactory-backend1-production.up.railway.app/api/auth/verify-otp",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

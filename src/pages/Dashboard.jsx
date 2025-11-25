@@ -17,7 +17,7 @@ const Dashboard = () => {
   // ----------------------------
   const fetchUserData = async () => {
     try {
-      const res = await fetch("https://fitfactory-backend1.onrender.com/api/auth/dashboard", {
+      const res = await fetch("https://fitfactory-backend1-production.up.railway.app/api/auth/dashboard", {
         method: "GET",
         headers: {
           Authorization: token,
@@ -100,7 +100,7 @@ const Dashboard = () => {
     setShowScanner(false);
 
     try {
-      const res = await fetch("https://fitfactory-backend1.onrender.com/api/auth/scan-access", {
+      const res = await fetch("https://fitfactory-backend1-production.up.railway.app/api/auth/scan-access", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

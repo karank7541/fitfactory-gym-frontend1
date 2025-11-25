@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://fitfactory-backend1.onrender.com/api/auth/login", {
+      const res = await fetch("https://fitfactory-backend1-production.up.railway.app/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -33,7 +33,7 @@ const Login = () => {
       localStorage.setItem("token", data.token);
 
       // Fetch full user data
-      const userRes = await fetch("https://fitfactory-backend1.onrender.com/api/auth/dashboard", {
+      const userRes = await fetch("https://fitfactory-backend1-production.up.railway.app/api/auth/dashboard", {
         method: "GET",
         headers: {
           Authorization: data.token,
